@@ -7,6 +7,7 @@ public class Interaction : MonoBehaviour {
 	public bool grabObj = false; //whether to attempt to grab an object within OnTriggerStay or not
 	float clickTimer; //buffer timer for a mouse click (accounts for skips in OnTriggerStay
 	float currentTimer;
+	Vector3 currentObjectBoxSize;
 	// Use this for initialization
 	void Start () {
 		clickTimer = 0.2f;
@@ -28,9 +29,9 @@ public class Interaction : MonoBehaviour {
 		}
 		if (Input.GetMouseButtonDown (0)) {
 			if (currentObject != null) {
-				Rigidbody tmp = currentObject.GetComponent<Rigidbody> ();
-				tmp.useGravity = true;
-				currentObject.GetComponent<BoxCollider> ().enabled = true;
+				currentObject.GetComponent<Rigidbody> ().useGravity = true;
+				BoxCollider tmp = currentObject.GetComponent<BoxCollider> ();
+				tmp.size = currentObjectBoxSize;
 				currentObject = null;
 			} else {
 				grabObj = true;
@@ -44,9 +45,10 @@ public class Interaction : MonoBehaviour {
 		}
 		if (currentObject == null && grabObj) {
 			currentObject = other.gameObject;
-			Rigidbody tmp = currentObject.GetComponent<Rigidbody> ();
-			tmp.useGravity = false;
-			currentObject.GetComponent<BoxCollider> ().enabled = false;
+			currentObject.GetComponent<Rigidbody> ().useGravity = false;
+			BoxCollider tmp = currentObject.GetComponent<BoxCollider> ();
+			currentObjectBoxSize = tmp.size;
+			tmp.size = new Vector3 (0, 0, 0);
 			grabObj = false;
 		}
 	}
