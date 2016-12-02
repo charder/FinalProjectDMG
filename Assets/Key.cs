@@ -4,6 +4,7 @@ using System.Collections;
 public class Key : MonoBehaviour {
 	public string keyName; //name of the gameObject that can unlock this 
 	public Lock myLock; //reference to the script this key location unlocks
+	bool unlocked;
 	// Use this for initialization
 	void Start () {
 	
@@ -11,11 +12,11 @@ public class Key : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 
-	void OnTriggerEnter(Collider other) {
+	void OnTriggerEnter (Collider other) {
 		if (other.gameObject.name == keyName) {
 			myLock.updateDoor (true);
 		}

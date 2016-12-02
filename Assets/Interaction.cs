@@ -27,7 +27,14 @@ public class Interaction : MonoBehaviour {
 			currentObject.transform.rotation = this.transform.rotation;
 		}
 		if (Input.GetMouseButtonDown (0)) {
-			grabObj = true;
+			if (currentObject != null) {
+				Rigidbody tmp = currentObject.GetComponent<Rigidbody> ();
+				tmp.useGravity = true;
+				currentObject.GetComponent<BoxCollider> ().enabled = true;
+				currentObject = null;
+			} else {
+				grabObj = true;
+			}
 		}
 	}
 
@@ -37,9 +44,9 @@ public class Interaction : MonoBehaviour {
 		}
 		if (currentObject == null && grabObj) {
 			currentObject = other.gameObject;
-			grabObj = false;
-		} else if (currentObject != null && grabObj) {
-			currentObject = null;
+			Rigidbody tmp = currentObject.GetComponent<Rigidbody> ();
+			tmp.useGravity = false;
+			currentObject.GetComponent<BoxCollider> ().enabled = false;
 			grabObj = false;
 		}
 	}
