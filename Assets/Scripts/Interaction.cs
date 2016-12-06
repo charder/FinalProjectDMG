@@ -5,6 +5,7 @@ public class Interaction : MonoBehaviour {
 	public GameObject currentObject;
 	public GameObject objectHoldPosition; //where the object should be held on this object when moving
 	public bool grabObj = false; //whether to attempt to grab an object within OnTriggerStay or not
+	public Material oh;
 	float clickTimer; //buffer timer for a mouse click (accounts for skips in OnTriggerStay
 	float currentTimer;
 	Vector3 currentObjectBoxSize;
@@ -46,6 +47,8 @@ public class Interaction : MonoBehaviour {
 		if (currentObject == null && grabObj) {
 			currentObject = other.gameObject;
 			currentObject.GetComponent<Rigidbody> ().useGravity = false;
+			Shader tmpColor = currentObject.GetComponent<Shader> ();
+
 			BoxCollider tmp = currentObject.GetComponent<BoxCollider> ();
 			currentObjectBoxSize = tmp.size;
 			tmp.size = new Vector3 (0, 0, 0);
