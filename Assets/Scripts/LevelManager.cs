@@ -24,6 +24,9 @@ public class LevelManager : MonoBehaviour {
 
 	public void LoadNextLevel() {
 		levelNum++;
+		if (levelNum >= levels.Length) {
+			
+		}
 		SceneManager.LoadScene (levels [levelNum]);
 	}
 }
