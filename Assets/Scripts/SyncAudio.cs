@@ -8,8 +8,10 @@ public class SyncAudio : MonoBehaviour {
 	public Color[] colorA; //array of colors
 	public float timeChange;
 	public UnityStandardAssets.ImageEffects.EdgeDetectionColor colorChange;
+	public AudioSource backGroundTrack;
 	// Use this for initialization
 	void Start () {
+		backGroundTrack.Play ();
 		colorChange.edgesColor = colorA [indColor];
 	
 	}
