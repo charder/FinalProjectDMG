@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour {
 	public string[] levels;
 	void Awake () {
 		DontDestroyOnLoad (transform.gameObject);
+		SceneManager.LoadScene (levels [0]);
 	}
 	// Use this for initialization
 	void Start () {
@@ -25,7 +26,7 @@ public class LevelManager : MonoBehaviour {
 	public void LoadNextLevel() {
 		levelNum++;
 		if (levelNum >= levels.Length) {
-			
+			levelNum = 0;
 		}
 		SceneManager.LoadScene (levels [levelNum]);
 	}
